@@ -1,19 +1,24 @@
-class Solution(object):
-   def generateParenthesis(self, n):
-      """
-      :type n: int
-      :rtype: List[str]
-      """
-      result = []
-      self.generateParenthesisUtil(n,n,"",result)
-      return result
-   def generateParenthesisUtil(self, left,right,temp,result):
-      if left == 0 and right == 0:
-         result.append(temp)
-         return
-      if left>0:
-         self.generateParenthesisUtil(left-1,right,temp+'(',result)
-      if right > left:
-         self.generateParenthesisUtil(left, right-1, temp + ')', result)
-ob = Solution()
-print(ob.generateParenthesis(3))
+def printParenthesis(str, n):
+    if(n > 0):
+        _printParenthesis(str, 0,n, 0, 0)
+    else:
+        print("Enter a valid number")
+    return
+def _printParenthesis(str, pos, n,open, close):
+    if(close == n):
+        for i in str:
+            print(i, end="")
+        print()
+        return
+    else:
+        if(open > close):
+            str[pos] = ')'
+            _printParenthesis(str, pos + 1, n,open, close + 1)
+        if(open < n):
+            str[pos] = '('
+            _printParenthesis(str, pos + 1, n, open + 1, close)
+ 
+n = int(input("Enetr a number "))
+str = [""] * 2 * n
+printParenthesis(str, n)
+
